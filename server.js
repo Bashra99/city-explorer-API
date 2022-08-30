@@ -28,20 +28,23 @@ server.get('/getWeatherCity',(req,res) => {
     res.send(weatherCityName);
 
 })
-// http://localhost:3000/getWetherData?name=wetherCityName
+// http://localhost:3000/getWetherData?name=weatherCityName
 server.get('/getWetherData',(req,res) => {
     console.log(req.query.name);
-    const result = wetherData.find(item=>{
+    const result = weatherData.find(item=>{
         if(item.city_name==req.query.name)
         {
             return item;
         }
+        else 
+        {return true};
     })
     res.send(result);
-} )
+})
+    
 
 server.get("*",(req,res)=>{
-    res.send("page not found");
+    res.send("eror 404");
 })  
 server.listen(PORT, () => {
     console.log(`hello ,iam listing on ${PORT}`)
