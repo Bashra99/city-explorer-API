@@ -21,27 +21,51 @@ server.get('/test',(req,res) => {
    
 })
 //http://localhost:3000/getWeatherCity
-server.get('/getWeatherCity',(req,res) => {
-    let weatherCityName = weatherData.map((item) => {
-        return item.city_name;
-    })
-    res.send(weatherCityName);
+// server.get('/getWeatherCity',(req,res) => {
+//     let weatherCityName = weatherData.map((item) => {
+//         return item.city_name.toUpperCase();
+//     })
+//     res.send(weatherCityName);
 
-})
-// http://localhost:3000/getWetherData?name=weatherCityName
+
+// http://localhost:3000/getWetherData
 server.get('/getWetherData',(req,res) => {
     console.log(req.query.name);
-    const result = weatherData.find(item=>{
-        if(item.city_name==req.query.name)
-        {
-            return item;
-        }
-        else 
-        {return true};
+    //
+    let result = weatherData.map((item) => {
+        return item ;
     })
     res.send(result);
 })
+// http://localhost:3000/getWetherDatas?name=weatherCityName
+server.get('/getWetherDatas',(req,res) => {
+    console.log(req.query.name);
+    //
+//     let result = weatherData.map((item) => {
+//         return [item.city_name, item.lon, item.lat] ;
+//     })
+//     res.send(result);
+// })
     
+   
+    const result = weatherData.find(item=>{
+         if(item.city_name == req.query.name)
+         {
+             return item;
+         }
+        //  else 
+        //  {return true};
+     })
+     res.send(result);
+})
+// let weatherCityName = weatherData.filter((item) => {
+    //     return item.city_name === req.query.name;
+    // let result = weatherData.map((item) => {
+    //     return item.data  ;
+    // })
+    // res.send(weatherCityName);
+    // console.log(req.query.name);
+   
 
 server.get("*",(req,res)=>{
     res.send("eror 404");
@@ -49,5 +73,3 @@ server.get("*",(req,res)=>{
 server.listen(PORT, () => {
     console.log(`hello ,iam listing on ${PORT}`)
 })
-
-
